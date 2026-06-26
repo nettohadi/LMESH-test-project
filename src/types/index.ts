@@ -4,3 +4,8 @@ export interface WorkLoad {
   value: number
   isEditing?: boolean
 }
+
+export interface AdditionalData {
+  actingAs: string
+  note: string
+}
