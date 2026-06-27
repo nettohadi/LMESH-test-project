@@ -67,21 +67,23 @@ function App() {
     const numberValue = Number(value)
 
     if (numberValue == 0 || isFictive) {
-      return 'bg-red-200 text-red-800'
+      return 'bg-red-100 text-red-800'
     }
 
     if (numberValue > 0 && numberValue < 1) {
-      return 'bg-amber-200 text-amber-800'
+      return 'bg-amber-100 text-amber-800'
     }
 
     if (numberValue >= 4) {
-      return 'bg-blue-200 text-blue-800'
+      return 'bg-blue-100 text-blue-800'
     }
+
+    return 'bg-teal-100 text-teal-800'
   }
 
   return (
     <>
-      <main className="bg-stone-200 w-full h-full flex flex-col justify-start">
+      <main className="bg-stone-100 w-full h-auto flex flex-col justify-start">
         <div className="bg-white w-full min-h-25 shadow-sm"></div>
         <div className="pt-14 py-0 px-8">
           <div className="bg-white rounded-2xl w-full h-full min-h-175 shadow-md p-10 scroll-auto">
@@ -104,7 +106,7 @@ function App() {
                       <th
                         key={workload.month}
                         className={cn(
-                          'w-25 p-2 rounded-md bg-teal-200 text-teal-800 font-normal',
+                          'w-25 p-2 rounded-md font-normal',
                           getMonthColor(workload.value, workload.isFictive),
                         )}
                       >
