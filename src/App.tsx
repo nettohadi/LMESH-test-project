@@ -1,12 +1,12 @@
 import './App.css'
-import { Checkbox } from '@/components/ui/checkbox'
 import { type PersonData, type Workload } from './types'
 import { useState } from 'react'
 import { cn, getDefaultData } from './lib/utils'
 import { toast } from 'sonner'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useDebouncedCallback } from 'use-debounce'
 import SelectActingAs from './components/SelectActingAs'
+import WorkloadCell from './components/workLoad/WorkloadCell'
+import LineSeparator from './components/LineSeparator'
 
 function App() {
   const [personData, setPersonData] = useState<PersonData>(getDefaultData())
@@ -33,20 +33,30 @@ function App() {
   }
 
   const validate = useDebouncedCallback((month: string, value: string) => {
-    if (value.trim() === '') {
-      updateWorkLoadByMonth(month, { value: '0' })
-    }
+    const numberValue = Number(value)
 
-    if (isNaN(Number(value))) {
+    if (isNaN(numberValue)) {
       toast.error('Please enter a valid number.', { id: 'invalid-number' })
-      updateWorkLoadByMonth(month, { value: '1' })
+      return updateWorkLoadByMonth(month, { value: '1' })
     }
 
-    if (Number(value) < 0 || Number(value) > 5) {
+    if (numberValue < 0 || numberValue > 5) {
       toast.error('Staffing must be between 0 and 5.', { id: 'staffing-range' })
-      updateWorkLoadByMonth(month, { value: '1' })
+      return updateWorkLoadByMonth(month, { value: '1' })
     }
   }, 500)
+
+  const normalize = (month: string, value: string) => {
+    const numberValue = Number(value)
+
+    if (value.trim() === '') {
+      return updateWorkLoadByMonth(month, { value: '0' })
+    }
+
+    if (numberValue.toString() !== value) {
+      return updateWorkLoadByMonth(month, { value: numberValue.toString() })
+    }
+  }
 
   const changeValue = (month: string, value: string) => {
     updateWorkLoadByMonth(month, { value: value })
@@ -92,7 +102,7 @@ function App() {
                     <th
                       key={workload.month}
                       className={cn(
-                        'w-25 p-2 rounded-md bg-teal-200 text-teal-800',
+                        'w-25 p-2 rounded-md bg-teal-200 text-teal-800 font-normal',
                         getMonthColor(workload.value, workload.isFictive),
                       )}
                     >
@@ -100,9 +110,7 @@ function App() {
                     </th>
                   ))}
                 </tr>
-                <tr className="">
-                  <th colSpan={13} className="border-b border-stone-400 h-5 "></th>
-                </tr>
+                <LineSeparator />
               </thead>
               <tbody>
                 <tr className="">
@@ -132,40 +140,12 @@ function App() {
                     </div>
                   </td>
                   {personData.workloads.map((workload) => (
-                    <td
-                      key={workload.month}
-                      className={cn(
-                        'w-25 px-2 py-1 rounded-md bg-stone-100 text-stone-700 font-normal',
-                        {
-                          'bg-orange-100': workload.isFictive,
-                          'text-orange-500': workload.isFictive,
-                        },
-                      )}
-                    >
-                      <span className="flex gap-1 justify-center items-center">
-                        <input
-                          type="text"
-                          onChange={(e) => changeValue(workload.month, e.target.value)}
-                          className="w-8 text-center rounded-sm border-2 border-transparent focus:border-blue-500 outline-none"
-                          value={workload.value}
-                        />
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <span className="inline-flex">
-                              <Checkbox
-                                checked={workload.isFictive}
-                                onCheckedChange={(checked) =>
-                                  toggleCheckbox(workload.month, checked)
-                                }
-                              />
-                            </span>
-                          </TooltipTrigger>
-                          <TooltipContent className="rounded-md">
-                            <p>Mark as fictive</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </span>
-                    </td>
+                    <WorkloadCell
+                      workload={workload}
+                      onChange={(value) => changeValue(workload.month, value)}
+                      onBlur={(value) => normalize(workload.month, value)}
+                      onToggleFictive={(checked) => toggleCheckbox(workload.month, checked)}
+                    />
                   ))}
                 </tr>
                 <tr>
@@ -187,13 +167,12 @@ function App() {
                       onChange={(e) => {
                         updatePersonData({ note: e.target.value })
                       }}
-                      value={personData.note || 'test'}
+                      value={personData.note}
+                      placeholder="note"
                     ></textarea>
                   </td>
                 </tr>
-                <tr>
-                  <td colSpan={13} className="border-b border-stone-400 h-5 "></td>
-                </tr>
+                <LineSeparator />
               </tbody>
             </table>
           </div>
