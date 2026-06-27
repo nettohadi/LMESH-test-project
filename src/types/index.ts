@@ -1,8 +1,14 @@
-export interface WorkLoad {
+export interface Workload {
   month: string
-  isActive: boolean
-  value: number
-  isEditing?: boolean
+  isFictive: boolean
+  value: string
+}
+
+export interface PersonData {
+  name: string
+  actingAs: string
+  note: string
+  workloads: Workload[]
 }
 
 export interface AdditionalData {
