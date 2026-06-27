@@ -36,12 +36,12 @@ function App() {
     const numberValue = Number(value)
 
     if (isNaN(numberValue)) {
-      toast.error('Please enter a valid number.', { id: 'invalid-number' })
+      toast.error('Please enter a valid number.')
       return updateWorkLoadByMonth(month, { value: '1' })
     }
 
     if (numberValue < 0 || numberValue > 5) {
-      toast.error('Staffing must be between 0 and 5.', { id: 'staffing-range' })
+      toast.error('Staffing must be between 0 and 5.')
       return updateWorkLoadByMonth(month, { value: '1' })
     }
   }, 500)
@@ -82,16 +82,16 @@ function App() {
   return (
     <>
       <main className="bg-stone-200 w-full h-full flex flex-col justify-start">
-        <div className="bg-white w-full h-25 shadow-sm"></div>
+        <div className="bg-white w-full min-h-25 shadow-sm"></div>
         <div className="pt-14 py-0 px-8">
           <div className="bg-white rounded-2xl w-full h-full min-h-175 shadow-md p-10 scroll-auto">
             <h1 className="text-2xl font-bold">{personData.name}</h1>
             <h3 className="text-stone-600">Workload</h3>
             <div className="overflow-auto">
-              <table className="border-separate border-spacing-x-2 border-spacing-y-2">
+              <table className="border-separate border-spacing-x-2 border-spacing-y-1">
                 <thead>
-                  <tr className="h-12.5">
-                    <th className="w-27.5 h-3"></th>
+                  <tr className="h-8">
+                    <th className="w-27.5 "></th>
                     {personData.workloads.map((workload) => (
                       <th key={workload.month} className="w-25 text-neutral-500/80 font-normal">
                         {workload.month}
@@ -116,7 +116,7 @@ function App() {
                 </thead>
                 <tbody>
                   <tr className="">
-                    <td colSpan={13} className="h-12 text-left">
+                    <td colSpan={13} className="h-12 text-left text-xl">
                       <span className="text-black font-bold">Serial Life PSA</span>
                       <span className="text-stone-500 font-normal">
                         {' '}
@@ -173,7 +173,7 @@ function App() {
                           updatePersonData({ note: e.target.value })
                         }}
                         value={personData.note}
-                        placeholder="note"
+                        placeholder="Comment"
                       ></textarea>
                     </td>
                   </tr>

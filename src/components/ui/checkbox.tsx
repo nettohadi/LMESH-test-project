@@ -11,14 +11,14 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
       data-slot="checkbox"
       className={cn(
         'peer relative flex size-4 shrink-0 items-center justify-center rounded-[4px]',
-        'border border-gray-400 transition-shadow outline-none group-has-disabled/field:opacity-50',
+        'border border-neutral-400/50 transition-shadow outline-none group-has-disabled/field:opacity-50',
         'after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring',
         'focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed',
         'disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-[3px]',
         'aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary',
         'dark:bg-input/30 dark:aria-invalid:border-destructive/50',
-        'dark:aria-invalid:ring-destructive/40 data-checked:border-orange-500',
-        'data-checked:bg-orange-500 data-checked:text-primary-foreground',
+        'dark:aria-invalid:ring-destructive/40 data-checked:border-orange-400',
+        'data-checked:bg-orange-400 data-checked:text-primary-foreground',
         'dark:data-checked:bg-primary',
         className,
       )}

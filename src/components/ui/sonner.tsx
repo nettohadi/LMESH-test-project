@@ -39,7 +39,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         classNames: {
           toast: 'flex items-center cn-toast !w-fit',
           content: 'flex-1 text-center',
-          title: 'text-center text-lg',
+          title: 'text-center text-[16px] font-thin mx-1',
           description: 'text-center',
         },
       }}

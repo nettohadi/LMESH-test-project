@@ -14,8 +14,8 @@ const WorkloadCell = ({ workload, onChange, onBlur, onToggleFictive }: Props) =>
   return (
     <td
       className={cn(
-        'w-25 px-2 py-1 rounded-md bg-stone-100 text-stone-700 font-normal',
-        workload.isFictive && 'bg-orange-100 text-orange-500',
+        'w-25 px-2 py-[1px] rounded-md bg-stone-100 text-stone-700 font-normal',
+        workload.isFictive && 'bg-orange-100 text-orange-400',
       )}
     >
       <span className="flex gap-1 justify-center items-center">
