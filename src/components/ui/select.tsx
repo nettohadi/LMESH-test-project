@@ -5,12 +5,7 @@ import { Select as SelectPrimitive } from 'radix-ui'
 
 import { cn } from '@/lib/utils'
 import { HugeiconsIcon } from '@hugeicons/react'
-import {
-  UnfoldMoreIcon,
-  Tick02Icon,
-  ArrowUp01Icon,
-  ArrowDown01Icon,
-} from '@hugeicons/core-free-icons'
+import { Tick02Icon, ArrowUp01Icon, ArrowDown01Icon } from '@hugeicons/core-free-icons'
 import { ChevronDown } from 'lucide-react'
 
 function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
