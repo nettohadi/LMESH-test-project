@@ -11,7 +11,7 @@ import LineSeparator from './components/LineSeparator'
 function App() {
   const [personData, setPersonData] = useState<PersonData>(getDefaultData())
 
-  const updateWorkLoadByMonth = (month: string, newValues: Partial<Workload>) => {
+  const updateWorkloadByMonth = (month: string, newValues: Partial<Workload>) => {
     setPersonData((prevState) => {
       const workloads = prevState.workloads.map((item) => {
         if (item.month === month) {
@@ -29,7 +29,7 @@ function App() {
   }
 
   const toggleCheckbox = (month: string, isChecked: boolean | string) => {
-    updateWorkLoadByMonth(month, { isFictive: Boolean(isChecked) })
+    updateWorkloadByMonth(month, { isFictive: Boolean(isChecked) })
   }
 
   const validate = useDebouncedCallback((month: string, value: string) => {
@@ -37,12 +37,12 @@ function App() {
 
     if (isNaN(numberValue)) {
       toast.error('Please enter a valid number.')
-      return updateWorkLoadByMonth(month, { value: '1' })
+      return updateWorkloadByMonth(month, { value: '1' })
     }
 
     if (numberValue < 0 || numberValue > 5) {
       toast.error('Staffing must be between 0 and 5.')
-      return updateWorkLoadByMonth(month, { value: '1' })
+      return updateWorkloadByMonth(month, { value: '1' })
     }
   }, 500)
 
@@ -50,16 +50,16 @@ function App() {
     const numberValue = Number(value)
 
     if (value.trim() === '') {
-      return updateWorkLoadByMonth(month, { value: '0' })
+      return updateWorkloadByMonth(month, { value: '0' })
     }
 
     if (numberValue.toString() !== value) {
-      return updateWorkLoadByMonth(month, { value: numberValue.toString() })
+      return updateWorkloadByMonth(month, { value: numberValue.toString() })
     }
   }
 
   const changeValue = (month: string, value: string) => {
-    updateWorkLoadByMonth(month, { value: value })
+    updateWorkloadByMonth(month, { value: value })
     validate(month, value)
   }
 
@@ -119,9 +119,8 @@ function App() {
                 <tbody>
                   <tr className="">
                     <td colSpan={13} className="h-12 text-left text-xl">
-                      <span className="text-black font-bold">Serial Life PSA</span>
+                      <span className="text-black font-medium">Serial Life PSA </span>
                       <span className="text-stone-500 font-normal">
-                        {' '}
                         | Europe | STELLANTIS | PSA
                       </span>
                     </td>
