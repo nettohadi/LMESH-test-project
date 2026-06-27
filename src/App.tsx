@@ -7,6 +7,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import SelectActingAs from './components/SelectActingAs'
 import WorkloadCell from './components/workLoad/WorkloadCell'
 import LineSeparator from './components/LineSeparator'
+import { Tooltip, TooltipContent, TooltipTrigger } from './components/ui/tooltip'
 
 function App() {
   const [personData, setPersonData] = useState<PersonData>(getDefaultData())
@@ -164,18 +165,27 @@ function App() {
                       />
                     </td>
                     <td colSpan={10} className="rounded-md  pt-2 text-left">
-                      <textarea
-                        className={cn(
-                          'w-full font-normal bg-stone-100 p-2',
-                          'rounded-sm h-9 focus:h-19 transition-[height]',
-                          'duration-200 resize-none outline-none text-neutral-600',
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <textarea
+                            className={cn(
+                              'w-full font-normal bg-stone-100 p-2',
+                              'rounded-sm h-9 focus:h-19 transition-[height]',
+                              'duration-200 resize-none outline-none text-neutral-600',
+                            )}
+                            onChange={(e) => {
+                              updatePersonData({ note: e.target.value })
+                            }}
+                            value={personData.note}
+                            placeholder="Comment"
+                          ></textarea>
+                        </TooltipTrigger>
+                        {personData.note.trim() && (
+                          <TooltipContent className="rounded-md" align="start" showArrow={false}>
+                            <p>{personData.note}</p>
+                          </TooltipContent>
                         )}
-                        onChange={(e) => {
-                          updatePersonData({ note: e.target.value })
-                        }}
-                        value={personData.note}
-                        placeholder="Comment"
-                      ></textarea>
+                      </Tooltip>
                     </td>
                   </tr>
                   <LineSeparator />
