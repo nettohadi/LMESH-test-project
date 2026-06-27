@@ -81,100 +81,106 @@ function App() {
 
   return (
     <>
-      <main className="bg-stone-200 w-full h-full flex justify-center pt-24 p-10">
-        <div className="bg-white rounded-lg w-full h-full shadow-md p-5 scroll-auto">
-          <h1 className="text-2xl font-bold">{personData.name}</h1>
-          <h3 className="text-stone-600">Workload</h3>
-          <div className="overflow-auto">
-            <table className="border-separate border-spacing-x-2 border-spacing-y-2">
-              <thead>
-                <tr className="h-12.5">
-                  <th className="w-27.5 h-3"></th>
-                  {personData.workloads.map((workload) => (
-                    <th key={workload.month} className="w-25">
-                      {workload.month}
-                    </th>
-                  ))}
-                </tr>
-                <tr>
-                  <th className="w-27.5 h-3"></th>
-                  {personData.workloads.map((workload) => (
-                    <th
-                      key={workload.month}
-                      className={cn(
-                        'w-25 p-2 rounded-md bg-teal-200 text-teal-800 font-normal',
-                        getMonthColor(workload.value, workload.isFictive),
-                      )}
-                    >
-                      {workload.isFictive ? 0 : workload.value}
-                    </th>
-                  ))}
-                </tr>
-                <LineSeparator />
-              </thead>
-              <tbody>
-                <tr className="">
-                  <td colSpan={13} className="h-12 text-left">
-                    <span className="text-black font-bold">Serial Life PSA</span>
-                    <span className="text-stone-500 font-normal"> | Europe | STELLANTIS | PSA</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="w-27.5 h-3 text-stone-400 font-normal text-right">Total</td>
-                  {personData.workloads.map((workload) => (
-                    <td key={workload.month} className="w-25 p-2 text-center font-bold">
-                      {workload.isFictive ? 0 : workload.value}
+      <main className="bg-stone-200 w-full h-full flex flex-col justify-start">
+        <div className="bg-white w-full h-25 shadow-sm"></div>
+        <div className="pt-14 py-0 px-8">
+          <div className="bg-white rounded-2xl w-full h-full min-h-175 shadow-md p-10 scroll-auto">
+            <h1 className="text-2xl font-bold">{personData.name}</h1>
+            <h3 className="text-stone-600">Workload</h3>
+            <div className="overflow-auto">
+              <table className="border-separate border-spacing-x-2 border-spacing-y-2">
+                <thead>
+                  <tr className="h-12.5">
+                    <th className="w-27.5 h-3"></th>
+                    {personData.workloads.map((workload) => (
+                      <th key={workload.month} className="w-25 text-neutral-500/80 font-normal">
+                        {workload.month}
+                      </th>
+                    ))}
+                  </tr>
+                  <tr>
+                    <th className="w-27.5 h-3"></th>
+                    {personData.workloads.map((workload) => (
+                      <th
+                        key={workload.month}
+                        className={cn(
+                          'w-25 p-2 rounded-md bg-teal-200 text-teal-800 font-normal',
+                          getMonthColor(workload.value, workload.isFictive),
+                        )}
+                      >
+                        {workload.isFictive ? 0 : workload.value}
+                      </th>
+                    ))}
+                  </tr>
+                  <LineSeparator />
+                </thead>
+                <tbody>
+                  <tr className="">
+                    <td colSpan={13} className="h-12 text-left">
+                      <span className="text-black font-bold">Serial Life PSA</span>
+                      <span className="text-stone-500 font-normal">
+                        {' '}
+                        | Europe | STELLANTIS | PSA
+                      </span>
                     </td>
-                  ))}
-                </tr>
-                <tr>
-                  <td rowSpan={2} className="w-27.5 h-3">
-                    <div className="flex gap-1 font-normal">
-                      <div>
-                        <div className="bg-blue-700 h-6 w-1.5 rounded-sm"></div>
+                  </tr>
+                  <tr>
+                    <td className="w-27.5 h-3 text-stone-400 font-normal text-right">Total</td>
+                    {personData.workloads.map((workload) => (
+                      <td key={workload.month} className="w-25 p-2 text-center font-bold">
+                        {workload.isFictive ? 0 : workload.value}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td rowSpan={2} className="w-27.5 h-3">
+                      <div className="flex gap-1 font-normal">
+                        <div>
+                          <div className="bg-blue-700 h-6 w-1.5 rounded-sm"></div>
+                        </div>
+                        <div className="text-left text-stone-500">
+                          <div>DE |</div>
+                          <div>MR10R801</div>
+                        </div>
                       </div>
-                      <div className="text-left text-stone-500">
-                        <div>DE |</div>
-                        <div>MR10R801</div>
-                      </div>
-                    </div>
-                  </td>
-                  {personData.workloads.map((workload) => (
-                    <WorkloadCell
-                      workload={workload}
-                      onChange={(value) => changeValue(workload.month, value)}
-                      onBlur={(value) => normalize(workload.month, value)}
-                      onToggleFictive={(checked) => toggleCheckbox(workload.month, checked)}
-                    />
-                  ))}
-                </tr>
-                <tr>
-                  <td colSpan={2} className="rounded-md pt-2 align-top">
-                    <SelectActingAs
-                      value={personData.actingAs}
-                      onValueChange={(value) => {
-                        updatePersonData({ actingAs: value })
-                      }}
-                    />
-                  </td>
-                  <td colSpan={10} className="rounded-md  pt-2 text-left">
-                    <textarea
-                      className={cn(
-                        'w-full font-normal bg-stone-100 p-2',
-                        'rounded-sm h-9 focus:h-19 transition-[height]',
-                        'duration-200 resize-none outline-none',
-                      )}
-                      onChange={(e) => {
-                        updatePersonData({ note: e.target.value })
-                      }}
-                      value={personData.note}
-                      placeholder="note"
-                    ></textarea>
-                  </td>
-                </tr>
-                <LineSeparator />
-              </tbody>
-            </table>
+                    </td>
+                    {personData.workloads.map((workload) => (
+                      <WorkloadCell
+                        workload={workload}
+                        onChange={(value) => changeValue(workload.month, value)}
+                        onBlur={(value) => normalize(workload.month, value)}
+                        onToggleFictive={(checked) => toggleCheckbox(workload.month, checked)}
+                      />
+                    ))}
+                  </tr>
+                  <tr>
+                    <td colSpan={2} className="rounded-md pt-2 align-top">
+                      <SelectActingAs
+                        value={personData.actingAs}
+                        onValueChange={(value) => {
+                          updatePersonData({ actingAs: value })
+                        }}
+                      />
+                    </td>
+                    <td colSpan={10} className="rounded-md  pt-2 text-left">
+                      <textarea
+                        className={cn(
+                          'w-full font-normal bg-stone-100 p-2',
+                          'rounded-sm h-9 focus:h-19 transition-[height]',
+                          'duration-200 resize-none outline-none',
+                        )}
+                        onChange={(e) => {
+                          updatePersonData({ note: e.target.value })
+                        }}
+                        value={personData.note}
+                        placeholder="note"
+                      ></textarea>
+                    </td>
+                  </tr>
+                  <LineSeparator />
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </main>
