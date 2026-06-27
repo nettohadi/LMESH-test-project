@@ -167,7 +167,7 @@ function App() {
                         className={cn(
                           'w-full font-normal bg-stone-100 p-2',
                           'rounded-sm h-9 focus:h-19 transition-[height]',
-                          'duration-200 resize-none outline-none',
+                          'duration-200 resize-none outline-none text-neutral-600',
                         )}
                         onChange={(e) => {
                           updatePersonData({ note: e.target.value })

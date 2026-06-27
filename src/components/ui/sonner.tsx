@@ -18,6 +18,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       theme={theme as ToasterProps['theme']}
       className="toaster group"
       position="top-center"
+      expand
       icons={{
         success: <HugeiconsIcon icon={CheckmarkCircle02Icon} strokeWidth={2} className="size-4" />,
         info: <HugeiconsIcon icon={InformationCircleIcon} strokeWidth={2} className="size-4" />,
