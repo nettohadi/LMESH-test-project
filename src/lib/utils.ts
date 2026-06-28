@@ -8,8 +8,10 @@ export const cn = (...inputs: ClassValue[]) => {
 
 export const getDefaultData = (): PersonData => {
   return {
+    id: 'MR10R801',
     name: 'BIANCHINI Thierry',
     actingAs: '',
+    code: 'DE',
     note: '',
     workloads: [
       { month: 'Jan', value: '1', isFictive: false },

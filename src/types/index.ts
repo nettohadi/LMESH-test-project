@@ -5,7 +5,9 @@ export interface Workload {
 }
 
 export interface PersonData {
+  id: string
   name: string
+  code: string
   actingAs: string
   note: string
   workloads: Workload[]

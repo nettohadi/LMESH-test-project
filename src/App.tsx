@@ -121,8 +121,8 @@ function App() {
                   <LineSeparator />
                 </thead>
                 <tbody>
-                  <tr className="">
-                    <td colSpan={13} className="h-12 text-left text-xl">
+                  <tr>
+                    <td colSpan={13} className="h-12 text-left text-xl pl-2">
                       <span className="text-black font-medium">Serial Life PSA </span>
                       <span className="text-stone-500 font-normal">
                         | Europe | STELLANTIS | PSA
@@ -138,14 +138,14 @@ function App() {
                     ))}
                   </tr>
                   <tr>
-                    <td rowSpan={2} className="w-27.5 h-3">
-                      <div className="flex gap-1 font-normal">
+                    <td rowSpan={2} className="w-27.5 h-3 align-top pt-1">
+                      <div className="flex justify-start just gap-1 font-normal">
                         <div>
                           <div className="bg-blue-700 h-6 w-1.5 rounded-sm"></div>
                         </div>
                         <div className="text-left text-stone-500">
-                          <div>DE |</div>
-                          <div>MR10R801</div>
+                          <div>{personData.code} |</div>
+                          <div>{personData.id}</div>
                         </div>
                       </div>
                     </td>

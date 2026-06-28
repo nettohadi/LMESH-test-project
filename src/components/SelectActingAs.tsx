@@ -21,7 +21,7 @@ const SelectActingAs = ({ value, onValueChange }: Props) => {
       }}
     >
       <SelectTrigger className="w-full max-w-48 bg-stone-100 rounded-sm border-0 h-12.5">
-        <SelectValue placeholder="Acting as" className="font-normal" />
+        <SelectValue placeholder="Acting As" className="font-normal" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
