@@ -9,6 +9,9 @@ import WorkloadCell from './components/workLoad/WorkloadCell'
 import LineSeparator from './components/LineSeparator'
 import { Tooltip, TooltipContent, TooltipTrigger } from './components/ui/tooltip'
 
+const MIN_STAFFING = 0
+const MAX_STAFFING = 5
+
 function App() {
   const [personData, setPersonData] = useState<PersonData>(getDefaultData())
 
@@ -41,8 +44,8 @@ function App() {
       return updateWorkloadByMonth(month, { value: '1' })
     }
 
-    if (numberValue < 0 || numberValue > 5) {
-      toast.error('Staffing must be between 0 and 5.')
+    if (numberValue < MIN_STAFFING || numberValue > MAX_STAFFING) {
+      toast.error(`Staffing must be between ${MIN_STAFFING} and ${MAX_STAFFING}.`)
       return updateWorkloadByMonth(month, { value: '1' })
     }
   }, 500)
@@ -148,6 +151,7 @@ function App() {
                     </td>
                     {personData.workloads.map((workload) => (
                       <WorkloadCell
+                        key={workload.month}
                         workload={workload}
                         onChange={(value) => changeValue(workload.month, value)}
                         onBlur={(value) => normalize(workload.month, value)}
